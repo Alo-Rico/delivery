@@ -288,31 +288,6 @@ textarea.input{
  color:white;
 }
 
-@media(max-width:700px){
-
- .categorias{
-  grid-template-columns:repeat(2,1fr);
- }
-
- .menu-container{
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
- }
-
- .product img{
-  height:150px;
- }
-
- h1{
-  font-size:30px;
- }
-
- #abrir-pedido{
-  width:90%;
-  right:5%;
- }
-}
-
 </style>
 
 </head>
@@ -393,9 +368,99 @@ Gs. 0
 
 </div>
 
-<!-- RESTO DEL HTML QUEDA EXACTAMENTE IGUAL -->
+<div class="categorias">
+
+<button id="btnPizza" class="cat-btn">
+🍕 PIZZAS
+</button>
+
+<button id="btnHamburguesa" class="cat-btn">
+🍔 HAMBURGUESAS
+</button>
+
+<button id="btnLomito" class="cat-btn">
+🥪 LOMITOS
+</button>
+
+<button id="btnBebida" class="cat-btn">
+🥤 BEBIDAS
+</button>
+
+</div>
+
+<div id="menu" class="menu-container"></div>
+
+<button id="abrir-pedido">
+🛒 ENVIAR PEDIDO
+</button>
+
+<div id="pedido-flotante">
+
+<h2 style="
+text-align:center;
+font-size:28px;
+margin-bottom:15px;
+color:#facc15;
+">
+Mi Pedido
+</h2>
+
+<div id="lista"></div>
+
+<div id="total">
+Gs. 0
+</div>
+
+</div>
 
 <script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+
+import {
+ getDatabase,
+ ref,
+ push,
+ onValue,
+ remove
+}
+from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+
+const firebaseConfig = {
+
+ apiKey: "AIzaSyADGYsqhbCFuKj2fXpontLpND_rtT7Nlno",
+
+ authDomain: "alorico-59754.firebaseapp.com",
+
+ databaseURL:
+ "https://alorico-59754-default-rtdb.firebaseio.com",
+
+ projectId: "alorico-59754"
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+const clienteId =
+"delivery_" + Date.now();
+
+const pedidoRef =
+ref(db,"pedidos/" + clienteId);
+
+const menuDiv =
+document.getElementById("menu");
+
+const listaDiv =
+document.getElementById("lista");
+
+const totalDiv =
+document.getElementById("total");
+
+let categoriaActual = "pizza";
 
 let mapsLink = "";
 
@@ -451,6 +516,23 @@ function redondearDelivery(valor){
  return Math.ceil(valor / 5000) * 5000;
 }
 
+function actualizarTotal(){
+
+ let total = 0;
+
+ document
+ .querySelectorAll(".precio-item")
+ .forEach(el=>{
+
+  total += Number(el.dataset.valor);
+ });
+
+ total += deliveryCosto;
+
+ totalDiv.innerText =
+ "Gs. " + total.toLocaleString();
+}
+
 document
 .getElementById("usar-ubicacion")
 .onclick = ()=>{
@@ -499,12 +581,6 @@ document
 
   alert(
    "Ubicación compartida ✔"
-  );
-
- },()=>{
-
-  alert(
-   "No se pudo obtener ubicación"
   );
 
  });
