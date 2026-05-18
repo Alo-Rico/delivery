@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Alo Rico Delivery - Pizzas</title>
+<title>Alo Rico Delivery</title>
 
 <style>
 
@@ -97,6 +98,54 @@ h1{
 textarea.input{
  resize:none;
  height:100px;
+}
+
+#usar-ubicacion{
+ width:100%;
+ margin-top:14px;
+ padding:16px;
+ border:none;
+ border-radius:16px;
+ background:#3b82f6;
+ color:white;
+ font-weight:bold;
+ cursor:pointer;
+}
+
+.categorias{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:12px;
+ width:95%;
+ max-width:900px;
+ margin:0 auto 20px;
+}
+
+.cat-btn{
+ padding:16px;
+ border:none;
+ border-radius:18px;
+ color:white;
+ font-weight:bold;
+ cursor:pointer;
+ font-size:14px;
+}
+
+#btnPizza{
+ background:#ef4444;
+}
+
+#btnHamburguesa{
+ background:#22c55e;
+}
+
+#btnLomito{
+ background:#f59e0b;
+ color:black;
+}
+
+#btnBebida{
+ background:#3b82f6;
 }
 
 .menu-container{
@@ -241,6 +290,10 @@ textarea.input{
 
 @media(max-width:700px){
 
+ .categorias{
+  grid-template-columns:repeat(2,1fr);
+ }
+
  .menu-container{
   grid-template-columns:repeat(2,1fr);
   gap:16px;
@@ -268,7 +321,7 @@ textarea.input{
 <h1>ALO RICO DELIVERY</h1>
 
 <p class="sub">
-Pedido Online • Delivery en Tiempo Real
+Delivery Online en Tiempo Real
 </p>
 
 </header>
@@ -293,7 +346,31 @@ Pedido Online • Delivery en Tiempo Real
 <textarea
  id="observacion"
  class="input"
- placeholder="Observaciones del pedido"></textarea>
+ placeholder="Observaciones"></textarea>
+
+<button id="usar-ubicacion">
+📍 Usar mi ubicación actual
+</button>
+
+</div>
+
+<div class="categorias">
+
+<button id="btnPizza" class="cat-btn">
+🍕 PIZZAS
+</button>
+
+<button id="btnHamburguesa" class="cat-btn">
+🍔 HAMBURGUESAS
+</button>
+
+<button id="btnLomito" class="cat-btn">
+🥪 LOMITOS
+</button>
+
+<button id="btnBebida" class="cat-btn">
+🥤 BEBIDAS
+</button>
 
 </div>
 
@@ -403,32 +480,38 @@ document.getElementById("total");
 
 let productoSeleccionado = null;
 
+let categoriaActual = "pizza";
+
+let mapsLink = "";
+
 const popup =
 document.getElementById("popup");
 
-const productosRef =
-ref(db,"productos");
+function cargarProductos(){
 
-onValue(productosRef,(snap)=>{
+ const productosRef =
+ ref(db,"productos");
 
- const data = snap.val();
+ onValue(productosRef,(snap)=>{
 
- menuDiv.innerHTML = "";
+  const data = snap.val();
 
- if(!data) return;
+  menuDiv.innerHTML = "";
 
- Object.values(data).forEach(prod=>{
+  if(!data) return;
 
-  if(prod.categoria !== "pizza")
-   return;
+  Object.values(data).forEach(prod=>{
 
-  const div =
-  document.createElement("div");
+   if(prod.categoria !== categoriaActual)
+    return;
 
-  div.className =
-  "product";
+   const div =
+   document.createElement("div");
 
-  div.innerHTML = `
+   div.className =
+   "product";
+
+   div.innerHTML = `
 
    <img src="${prod.imagen}">
 
@@ -438,26 +521,82 @@ onValue(productosRef,(snap)=>{
     Gs. ${Number(prod.precio).toLocaleString()}
    </p>
 
-  `;
+   `;
 
-  div.onclick = ()=>{
+   div.onclick = ()=>{
 
-   productoSeleccionado = prod;
+    productoSeleccionado = prod;
 
-   document.getElementById("popup-nombre")
-   .innerText = prod.nombre;
+    document.getElementById("popup-nombre")
+    .innerText = prod.nombre;
 
-   document.getElementById("cantidad")
-   .value = 1;
+    document.getElementById("cantidad")
+    .value = 1;
 
-   popup.style.display = "flex";
-  };
+    popup.style.display = "flex";
+   };
 
-  menuDiv.appendChild(div);
+   menuDiv.appendChild(div);
+
+  });
 
  });
 
-});
+}
+
+cargarProductos();
+
+document.getElementById("btnPizza")
+.onclick = ()=>{
+
+ categoriaActual = "pizza";
+ cargarProductos();
+};
+
+document.getElementById("btnHamburguesa")
+.onclick = ()=>{
+
+ categoriaActual = "hamburguesa";
+ cargarProductos();
+};
+
+document.getElementById("btnLomito")
+.onclick = ()=>{
+
+ categoriaActual = "lomito";
+ cargarProductos();
+};
+
+document.getElementById("btnBebida")
+.onclick = ()=>{
+
+ categoriaActual = "bebida";
+ cargarProductos();
+};
+
+document
+.getElementById("usar-ubicacion")
+.onclick = ()=>{
+
+ navigator.geolocation
+ .getCurrentPosition(pos=>{
+
+  const lat =
+  pos.coords.latitude;
+
+  const lng =
+  pos.coords.longitude;
+
+  mapsLink =
+  `https://maps.google.com/?q=${lat},${lng}`;
+
+  alert(
+   "Ubicación cargada ✔"
+  );
+
+ });
+
+};
 
 window.cerrarPopup = ()=>{
 
@@ -480,7 +619,10 @@ document.getElementById("agregar")
   precio:
   Number(productoSeleccionado.precio),
 
-  cantidad
+  cantidad,
+
+  categoria:
+  productoSeleccionado.categoria
 
  });
 
@@ -615,6 +757,9 @@ document.getElementById("enviar")
     tipoPedido:
     "delivery",
 
+    mesa:
+    "DELIVERY",
+
     nombre,
 
     telefono,
@@ -622,6 +767,9 @@ document.getElementById("enviar")
     direccion,
 
     observacion,
+
+    maps:
+    mapsLink,
 
     estado:
     "pendiente",
@@ -653,3 +801,4 @@ document.getElementById("enviar")
 
 </body>
 </html>
+```
