@@ -149,7 +149,7 @@ textarea.input{
  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
  gap:22px;
  padding:25px;
- padding-bottom:320px;
+ padding-bottom:160px;
  max-width:1400px;
  margin:auto;
 }
@@ -191,6 +191,7 @@ textarea.input{
 }
 
 #pedido-flotante{
+ display:none;
  position:fixed;
  bottom:20px;
  left:50%;
@@ -244,6 +245,22 @@ textarea.input{
  font-size:18px;
  font-weight:bold;
  cursor:pointer;
+}
+
+#abrir-pedido{
+ position:fixed;
+ bottom:20px;
+ right:20px;
+ background:#16a34a;
+ color:white;
+ border:none;
+ padding:18px 24px;
+ border-radius:20px;
+ font-weight:bold;
+ font-size:16px;
+ z-index:99999;
+ cursor:pointer;
+ box-shadow:0 10px 25px rgba(0,0,0,.35);
 }
 
 #popup{
@@ -301,6 +318,11 @@ textarea.input{
 
  h1{
   font-size:30px;
+ }
+
+ #abrir-pedido{
+  width:90%;
+  right:5%;
  }
 }
 
@@ -367,6 +389,10 @@ Delivery Online en Tiempo Real
 
 <div id="menu" class="menu-container"></div>
 
+<button id="abrir-pedido">
+🛒 ENVIAR MI PEDIDO
+</button>
+
 <div id="pedido-flotante">
 
 <h2 style="
@@ -408,7 +434,7 @@ Producto
  id="btn-entera"
  class="popup-btn"
  style="background:#16a34a;">
-🍕 ENTERA
+AGREGAR
 </button>
 
 <button
@@ -487,6 +513,27 @@ let mediaPizza = null;
 const popup =
 document.getElementById("popup");
 
+let timeoutPedido = null;
+
+document
+.getElementById("abrir-pedido")
+.onclick = ()=>{
+
+ const panel =
+ document.getElementById("pedido-flotante");
+
+ panel.style.display = "block";
+
+ clearTimeout(timeoutPedido);
+
+ timeoutPedido = setTimeout(()=>{
+
+  panel.style.display = "none";
+
+ },7000);
+
+};
+
 function cargarProductos(){
 
  const productosRef =
@@ -540,10 +587,16 @@ function cargarProductos(){
      document.getElementById("btn-media")
      .style.display = "none";
 
+     document.getElementById("btn-entera")
+     .innerText = "AGREGAR";
+
     }else{
 
      document.getElementById("btn-media")
      .style.display = "block";
+
+     document.getElementById("btn-entera")
+     .innerText = "🍕 ENTERA";
     }
 
    };
@@ -881,6 +934,9 @@ document.getElementById("enviar")
   listaDiv.innerHTML = "";
 
   totalDiv.innerText = "Gs. 0";
+
+  document.getElementById("pedido-flotante")
+  .style.display = "none";
 
  },{onlyOnce:true});
 
