@@ -29,14 +29,11 @@ body::before{
  content:"";
  position:fixed;
  inset:0;
-
  background:
  linear-gradient(rgba(0,0,0,.84),rgba(0,0,0,.92)),
  url('https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1600&auto=format&fit=crop');
-
  background-size:cover;
  background-position:center;
-
  z-index:-2;
 }
 
@@ -113,7 +110,7 @@ textarea.input{
 
 .categorias{
  display:grid;
- grid-template-columns:repeat(3,1fr);
+ grid-template-columns:repeat(4,1fr);
  gap:12px;
  width:95%;
  max-width:900px;
@@ -128,6 +125,10 @@ textarea.input{
  font-weight:bold;
  cursor:pointer;
  font-size:14px;
+}
+
+#btnPizza{
+ background:#ef4444;
 }
 
 #btnHamburguesa{
@@ -286,7 +287,7 @@ textarea.input{
 @media(max-width:700px){
 
  .categorias{
-  grid-template-columns:1fr;
+  grid-template-columns:repeat(2,1fr);
  }
 
  .menu-container{
@@ -345,6 +346,10 @@ Delivery Online en Tiempo Real
 </div>
 
 <div class="categorias">
+
+<button id="btnPizza" class="cat-btn">
+🍕 PIZZAS
+</button>
 
 <button id="btnHamburguesa" class="cat-btn">
 🍔 HAMBURGUESAS
@@ -529,6 +534,18 @@ function cargarProductos(){
     .value = 1;
 
     popup.style.display = "flex";
+
+    if(categoriaActual !== "pizza"){
+
+     document.getElementById("btn-media")
+     .style.display = "none";
+
+    }else{
+
+     document.getElementById("btn-media")
+     .style.display = "block";
+    }
+
    };
 
    menuDiv.appendChild(div);
@@ -541,10 +558,17 @@ function cargarProductos(){
 
 cargarProductos();
 
+document.getElementById("btnPizza")
+.onclick = ()=>{
+
+ categoriaActual = "pizza";
+ cargarProductos();
+};
+
 document.getElementById("btnHamburguesa")
 .onclick = ()=>{
 
- categoriaActual = "hamburguesas";
+ categoriaActual = "hamburguesa";
  cargarProductos();
 };
 
@@ -558,7 +582,7 @@ document.getElementById("btnLomito")
 document.getElementById("btnBebida")
 .onclick = ()=>{
 
- categoriaActual = "bebidas";
+ categoriaActual = "bebida";
  cargarProductos();
 };
 
@@ -613,7 +637,9 @@ document.getElementById("btn-entera")
   productoSeleccionado.categoria,
 
   tipo:
-  "Pizza Entera"
+  categoriaActual === "pizza"
+  ? "Pizza Entera"
+  : "Normal"
 
  });
 
@@ -709,6 +735,14 @@ onValue(pedidoRef,(snap)=>{
 
      <p>
       ${p.cantidad}x ${p.nombre}
+     </p>
+
+     <p style="
+      color:#facc15;
+      font-size:13px;
+      margin-top:4px;
+     ">
+      ${p.tipo || ""}
      </p>
 
      <p style="
