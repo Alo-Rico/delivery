@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -337,11 +336,6 @@ Delivery Online en Tiempo Real
  id="telefono"
  class="input"
  placeholder="Teléfono">
-
-<input
- id="direccion"
- class="input"
- placeholder="Dirección de entrega">
 
 <textarea
  id="observacion"
@@ -710,22 +704,26 @@ document.getElementById("enviar")
  document.getElementById("telefono")
  .value.trim();
 
- const direccion =
- document.getElementById("direccion")
- .value.trim();
-
  const observacion =
  document.getElementById("observacion")
  .value.trim();
 
  if(
   !nombre ||
-  !telefono ||
-  !direccion
+  !telefono
  ){
 
   alert(
-   "Completa nombre, teléfono y dirección"
+   "Completa nombre y teléfono"
+  );
+
+  return;
+ }
+
+ if(!mapsLink){
+
+  alert(
+   "Debes cargar tu ubicación"
   );
 
   return;
@@ -764,8 +762,6 @@ document.getElementById("enviar")
 
     telefono,
 
-    direccion,
-
     observacion,
 
     maps:
@@ -801,4 +797,3 @@ document.getElementById("enviar")
 
 </body>
 </html>
-```
