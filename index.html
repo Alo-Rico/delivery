@@ -193,7 +193,7 @@ textarea.input{
 #pedido-flotante{
  display:none;
  position:fixed;
- bottom:20px;
+ bottom:90px;
  left:50%;
  transform:translateX(-50%);
  width:95%;
@@ -232,19 +232,6 @@ textarea.input{
  color:#22c55e;
  font-weight:bold;
  text-align:center;
-}
-
-#enviar{
- width:100%;
- margin-top:18px;
- padding:16px;
- border:none;
- border-radius:18px;
- background:#16a34a;
- color:white;
- font-size:18px;
- font-weight:bold;
- cursor:pointer;
 }
 
 #abrir-pedido{
@@ -390,7 +377,7 @@ Delivery Online en Tiempo Real
 <div id="menu" class="menu-container"></div>
 
 <button id="abrir-pedido">
-🛒 ENVIAR MI PEDIDO
+🛒 ENVIAR PEDIDO
 </button>
 
 <div id="pedido-flotante">
@@ -409,10 +396,6 @@ Mi Pedido
 <div id="total">
 Gs. 0
 </div>
-
-<button id="enviar">
-ENVIAR PEDIDO
-</button>
 
 </div>
 
@@ -521,6 +504,13 @@ document
 
  const panel =
  document.getElementById("pedido-flotante");
+
+ if(panel.style.display === "block"){
+
+  enviarPedido();
+
+  return;
+ }
 
  panel.style.display = "block";
 
@@ -635,7 +625,7 @@ document.getElementById("btnLomito")
 document.getElementById("btnBebida")
 .onclick = ()=>{
 
- categoriaActual = "bebida";
+ categoriaActual = "bebidas";
  cargarProductos();
 };
 
@@ -839,8 +829,7 @@ onValue(pedidoRef,(snap)=>{
 
 });
 
-document.getElementById("enviar")
-.onclick = ()=>{
+function enviarPedido(){
 
  const nombre =
  document.getElementById("nombre")
@@ -940,7 +929,7 @@ document.getElementById("enviar")
 
  },{onlyOnce:true});
 
-};
+}
 
 </script>
 
