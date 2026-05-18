@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,924 +8,471 @@
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
 *{
- margin:0;
- padding:0;
- box-sizing:border-box;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
- font-family:'Poppins',sans-serif;
- background:#111827;
- color:white;
- min-height:100vh;
- overflow-x:hidden;
+  background:#f5f5f5;
+  padding:15px;
+  color:#222;
 }
 
-body::before{
- content:"";
- position:fixed;
- inset:0;
- background:
- linear-gradient(rgba(0,0,0,.84),rgba(0,0,0,.92)),
- url('https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1600&auto=format&fit=crop');
- background-size:cover;
- background-position:center;
- z-index:-2;
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+.header{
+  background:#ff5722;
+  color:white;
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+  margin-bottom:20px;
 }
 
-body::after{
- content:"";
- position:fixed;
- inset:0;
- backdrop-filter:blur(6px);
- z-index:-1;
+.header h1{
+  font-size:32px;
 }
 
-header{
- text-align:center;
- padding:30px 20px 15px;
+.header p{
+  margin-top:8px;
+  opacity:0.9;
 }
 
-.logo{
- width:120px;
- border-radius:50%;
- border:4px solid #facc15;
- background:white;
- box-shadow:0 0 35px rgba(250,204,21,.35);
+/* ========================= */
+/* PRODUCTOS */
+/* ========================= */
+
+.producto{
+  background:white;
+  border-radius:15px;
+  padding:15px;
+  margin-bottom:15px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
-h1{
- margin-top:20px;
- font-size:40px;
- color:#facc15;
+.producto h2{
+  font-size:22px;
+  margin-bottom:10px;
 }
 
-.sub{
- color:#d1d5db;
- margin-top:10px;
+.producto p{
+  color:#666;
+  margin-bottom:15px;
 }
 
-.formulario{
- width:95%;
- max-width:700px;
- margin:25px auto;
- background:rgba(255,255,255,.06);
- border:1px solid rgba(255,255,255,.08);
- border-radius:28px;
- padding:25px;
- backdrop-filter:blur(10px);
+.producto-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.input{
- width:100%;
- padding:16px;
- border:none;
- border-radius:16px;
- background:#1f2937;
- color:white;
- margin-top:14px;
- font-size:15px;
+.precio{
+  font-size:24px;
+  font-weight:bold;
+  color:#ff5722;
 }
 
-textarea.input{
- resize:none;
- height:100px;
+button{
+  border:none;
+  border-radius:10px;
+  padding:12px 18px;
+  background:#ff5722;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.2s;
 }
 
-#usar-ubicacion{
- width:100%;
- margin-top:14px;
- padding:16px;
- border:none;
- border-radius:16px;
- background:#3b82f6;
- color:white;
- font-weight:bold;
- cursor:pointer;
+button:hover{
+  opacity:0.9;
 }
 
-.categorias{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:12px;
- width:95%;
- max-width:900px;
- margin:0 auto 20px;
+/* ========================= */
+/* DELIVERY */
+/* ========================= */
+
+.delivery-box{
+  background:#fff7e8;
+  border:2px solid #ff9800;
+  padding:15px;
+  border-radius:15px;
+  margin-top:20px;
+  line-height:1.8;
+  font-size:18px;
 }
 
-.cat-btn{
- padding:16px;
- border:none;
- border-radius:18px;
- color:white;
- font-weight:bold;
- cursor:pointer;
- font-size:14px;
+/* ========================= */
+/* TOTAL */
+/* ========================= */
+
+.total-box{
+  margin-top:20px;
+  background:#222;
+  color:white;
+  border-radius:15px;
+  padding:20px;
+  text-align:center;
 }
 
-#btnPizza{
- background:#ef4444;
+.total-box h2{
+  margin-bottom:10px;
 }
 
-#btnHamburguesa{
- background:#22c55e;
+#subtotalTexto,
+#deliveryTexto,
+#totalFinal{
+  margin-top:10px;
 }
 
-#btnLomito{
- background:#f59e0b;
- color:black;
+#totalFinal{
+  font-size:34px;
+  font-weight:bold;
+  color:#4caf50;
 }
 
-#btnBebida{
- background:#3b82f6;
+/* ========================= */
+/* BOTON FINAL */
+/* ========================= */
+
+.btn-pedido{
+  width:100%;
+  margin-top:20px;
+  padding:18px;
+  font-size:20px;
+  border-radius:15px;
 }
 
-.menu-container{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
- gap:22px;
- padding:25px;
- padding-bottom:160px;
- max-width:1400px;
- margin:auto;
-}
+/* ========================= */
+/* CARRITO */
+/* ========================= */
 
-.product{
- background:rgba(255,255,255,.08);
- border:1px solid rgba(255,255,255,.08);
- border-radius:28px;
- overflow:hidden;
- cursor:pointer;
- transition:.25s;
- backdrop-filter:blur(10px);
- box-shadow:0 10px 30px rgba(0,0,0,.30);
-}
-
-.product:hover{
- transform:translateY(-6px);
-}
-
-.product img{
- width:100%;
- height:190px;
- object-fit:cover;
-}
-
-.product h3{
- font-size:20px;
- margin-top:16px;
- padding:0 12px;
- text-align:center;
-}
-
-.product p{
- margin:14px 0 24px;
- text-align:center;
- font-size:22px;
- font-weight:700;
- color:#22c55e;
-}
-
-#pedido-flotante{
- display:none;
- position:fixed;
- bottom:90px;
- left:50%;
- transform:translateX(-50%);
- width:95%;
- max-width:500px;
- background:#111827;
- border-radius:28px;
- padding:24px;
- border:1px solid rgba(255,255,255,.08);
- box-shadow:0 10px 40px rgba(0,0,0,.45);
- z-index:9999;
-}
-
-.item{
- display:flex;
- justify-content:space-between;
- align-items:center;
- background:rgba(255,255,255,.05);
- padding:12px;
- border-radius:14px;
- margin-top:10px;
-}
-
-.btn-eliminar{
- width:30px;
- height:30px;
- border:none;
- border-radius:50%;
- background:#ef4444;
- color:white;
- cursor:pointer;
-}
-
-#total{
- margin-top:18px;
- font-size:28px;
- color:#22c55e;
- font-weight:bold;
- text-align:center;
-}
-
-#abrir-pedido{
- position:fixed;
- bottom:20px;
- right:20px;
- background:#16a34a;
- color:white;
- border:none;
- padding:18px 24px;
- border-radius:20px;
- font-weight:bold;
- font-size:16px;
- z-index:99999;
- cursor:pointer;
- box-shadow:0 10px 25px rgba(0,0,0,.35);
-}
-
-#popup{
- display:none;
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.75);
- justify-content:center;
- align-items:center;
- z-index:99999;
-}
-
-.popup-content{
- background:#111827;
- padding:28px;
- border-radius:24px;
- width:320px;
-}
-
-.popup-content input{
- width:100%;
- padding:14px;
- border:none;
- border-radius:14px;
- background:#1f2937;
- color:white;
- margin-top:15px;
-}
-
-.popup-btn{
- margin-top:15px;
- width:100%;
- padding:14px;
- border:none;
- border-radius:14px;
- font-weight:bold;
- cursor:pointer;
- color:white;
-}
-
-@media(max-width:700px){
-
- .categorias{
-  grid-template-columns:repeat(2,1fr);
- }
-
- .menu-container{
-  grid-template-columns:repeat(2,1fr);
-  gap:16px;
- }
-
- .product img{
-  height:150px;
- }
-
- h1{
-  font-size:30px;
- }
-
- #abrir-pedido{
-  width:90%;
-  right:5%;
- }
+.carrito-item{
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
 </style>
-
 </head>
 
 <body>
 
-<header>
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
 
-<img src="logo.png" class="logo">
+<div class="header">
+  <h1>Alo Rico</h1>
+  <p>Delivery rápido 🍔🍕🌭</p>
+</div>
 
-<h1>ALO RICO DELIVERY</h1>
+<!-- ========================= -->
+<!-- PRODUCTOS -->
+<!-- ========================= -->
 
-<p class="sub">
-Delivery Online en Tiempo Real
-</p>
+<div class="producto">
+  <h2>Hamburguesa Completa</h2>
+  <p>Carne, jamón, queso, huevo y papas</p>
 
-</header>
+  <div class="producto-footer">
+    <div class="precio">Gs. 35.000</div>
 
-<div class="formulario">
+    <button onclick="agregarProducto('Hamburguesa Completa', 35000)">
+      Agregar
+    </button>
+  </div>
+</div>
 
-<input
- id="nombre"
- class="input"
- placeholder="Nombre y Apellido">
+<div class="producto">
+  <h2>Pizza Familiar</h2>
+  <p>Muzzarella y jamón</p>
 
-<input
- id="telefono"
- class="input"
- placeholder="Teléfono">
+  <div class="producto-footer">
+    <div class="precio">Gs. 60.000</div>
 
-<textarea
- id="observacion"
- class="input"
- placeholder="Observaciones"></textarea>
+    <button onclick="agregarProducto('Pizza Familiar', 60000)">
+      Agregar
+    </button>
+  </div>
+</div>
 
-<button id="usar-ubicacion">
-📍 Compartir ubicación (opcional)
-</button>
+<div class="producto">
+  <h2>Lomito Árabe</h2>
+  <p>Carne, verduras y salsas especiales</p>
+
+  <div class="producto-footer">
+    <div class="precio">Gs. 40.000</div>
+
+    <button onclick="agregarProducto('Lomito Árabe', 40000)">
+      Agregar
+    </button>
+  </div>
+</div>
+
+<!-- ========================= -->
+<!-- DELIVERY -->
+<!-- ========================= -->
+
+<div class="delivery-box">
+
+  <div id="distanciaTexto">
+    📍 Distancia: calculando...
+  </div>
+
+  <div id="deliveryTexto2">
+    🚗 Delivery: calculando...
+  </div>
 
 </div>
 
-<div class="categorias">
+<!-- ========================= -->
+<!-- TOTAL -->
+<!-- ========================= -->
 
-<button id="btnPizza" class="cat-btn">
-🍕 PIZZAS
-</button>
+<div class="total-box">
 
-<button id="btnHamburguesa" class="cat-btn">
-🍔 HAMBURGUESAS
-</button>
+  <h2>Tu Pedido</h2>
 
-<button id="btnLomito" class="cat-btn">
-🥪 LOMITOS
-</button>
+  <div id="listaCarrito"></div>
 
-<button id="btnBebida" class="cat-btn">
-🥤 BEBIDAS
-</button>
+  <div id="subtotalTexto">
+    Subtotal: Gs. 0
+  </div>
 
-</div>
+  <div id="deliveryTexto">
+    Delivery: Gs. 0
+  </div>
 
-<div id="menu" class="menu-container"></div>
-
-<button id="abrir-pedido">
-🛒 ENVIAR PEDIDO
-</button>
-
-<div id="pedido-flotante">
-
-<h2 style="
-text-align:center;
-font-size:28px;
-margin-bottom:15px;
-color:#facc15;
-">
-Mi Pedido
-</h2>
-
-<div id="lista"></div>
-
-<div id="total">
-Gs. 0
-</div>
+  <div id="totalFinal">
+    Gs. 0
+  </div>
 
 </div>
 
-<div id="popup">
+<!-- ========================= -->
+<!-- BOTON -->
+<!-- ========================= -->
 
-<div class="popup-content">
-
-<h2 id="popup-nombre">
-Producto
-</h2>
-
-<input
- id="cantidad"
- type="number"
- value="1"
- min="1">
-
-<button
- id="btn-entera"
- class="popup-btn"
- style="background:#16a34a;">
-AGREGAR
+<button class="btn-pedido" onclick="enviarPedido()">
+  HACER PEDIDO
 </button>
 
-<button
- id="btn-media"
- class="popup-btn"
- style="background:#f59e0b;">
-🍕 MEDIA
-</button>
+<script>
 
-<button
- onclick="cerrarPopup()"
- class="popup-btn"
- style="background:#ef4444;">
-CANCELAR
-</button>
+// ===============================
+// UBICACION ALO RICO
+// ===============================
 
-</div>
+const LOCAL_ALO_RICO = {
+  lat: -25.387938,
+  lng: -57.355127
+};
 
-</div>
+// ===============================
+// VARIABLES
+// ===============================
 
-<script type="module">
+let carrito = [];
+let carritoTotal = 0;
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+let ubicacionCliente = null;
+let distanciaCliente = 0;
+let costoDelivery = 0;
 
-import {
- getDatabase,
- ref,
- push,
- onValue,
- remove
+// ===============================
+// AGREGAR PRODUCTO
+// ===============================
+
+function agregarProducto(nombre, precio){
+
+  carrito.push({
+    nombre,
+    precio
+  });
+
+  carritoTotal += precio;
+
+  actualizarCarrito();
 }
-from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
 
-const firebaseConfig = {
+// ===============================
+// ACTUALIZAR CARRITO
+// ===============================
 
- apiKey: "AIzaSyADGYsqhbCFuKj2fXpontLpND_rtT7Nlno",
+function actualizarCarrito(){
 
- authDomain: "alorico-59754.firebaseapp.com",
+  let html = "";
 
- databaseURL:
- "https://alorico-59754-default-rtdb.firebaseio.com",
+  carrito.forEach(item => {
 
- projectId: "alorico-59754"
-};
+    html += `
+      <div class="carrito-item">
+        <span>${item.nombre}</span>
+        <span>Gs. ${item.precio.toLocaleString()}</span>
+      </div>
+    `;
+  });
 
-const app =
-initializeApp(firebaseConfig);
+  document.getElementById("listaCarrito").innerHTML = html;
 
-const db =
-getDatabase(app);
+  document.getElementById("subtotalTexto").innerHTML =
+    "Subtotal: Gs. " + carritoTotal.toLocaleString();
 
-const clienteId =
-"delivery_" + Date.now();
+  actualizarTotalFinal();
+}
 
-const pedidoRef =
-ref(db,"pedidos/" + clienteId);
+// ===============================
+// DISTANCIA
+// ===============================
 
-const menuDiv =
-document.getElementById("menu");
+function calcularDistancia(lat1, lon1, lat2, lon2){
 
-const listaDiv =
-document.getElementById("lista");
+  const R = 6371;
 
-const totalDiv =
-document.getElementById("total");
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
 
-let productoSeleccionado = null;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) *
+    Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) *
+    Math.sin(dLon / 2);
 
-let categoriaActual = "pizza";
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-let mapsLink = "";
+  return R * c;
+}
 
-let mediaPizza = null;
+// ===============================
+// COSTO DELIVERY
+// ===============================
 
-const popup =
-document.getElementById("popup");
+function calcularCostoDelivery(distanciaKm){
 
-let timeoutPedido = null;
+  if(distanciaKm <= 3) return 10000;
+  if(distanciaKm <= 6) return 15000;
+  if(distanciaKm <= 9) return 20000;
+  if(distanciaKm <= 12) return 25000;
 
-document
-.getElementById("abrir-pedido")
-.onclick = ()=>{
+  return 30000;
+}
 
- const panel =
- document.getElementById("pedido-flotante");
+// ===============================
+// UBICACION CLIENTE
+// ===============================
 
- if(panel.style.display === "block"){
+function obtenerUbicacionCliente(){
 
-  enviarPedido();
-
-  return;
- }
-
- panel.style.display = "block";
-
- clearTimeout(timeoutPedido);
-
- timeoutPedido = setTimeout(()=>{
-
-  panel.style.display = "none";
-
- },7000);
-
-};
-
-function cargarProductos(){
-
- const productosRef =
- ref(db,"productos");
-
- onValue(productosRef,(snap)=>{
-
-  const data = snap.val();
-
-  menuDiv.innerHTML = "";
-
-  if(!data) return;
-
-  Object.values(data).forEach(prod=>{
-
-   if(prod.categoria !== categoriaActual)
+  if(!navigator.geolocation){
+    alert("Tu navegador no soporta GPS");
     return;
+  }
 
-   const div =
-   document.createElement("div");
+  navigator.geolocation.getCurrentPosition(
 
-   div.className =
-   "product";
+    (position) => {
 
-   div.innerHTML = `
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
 
-   <img src="${prod.imagen}">
+      ubicacionCliente = { lat, lng };
 
-   <h3>${prod.nombre}</h3>
+      distanciaCliente = calcularDistancia(
+        LOCAL_ALO_RICO.lat,
+        LOCAL_ALO_RICO.lng,
+        lat,
+        lng
+      );
 
-   <p>
-    Gs. ${Number(prod.precio).toLocaleString()}
-   </p>
+      costoDelivery = calcularCostoDelivery(distanciaCliente);
 
-   `;
+      document.getElementById("distanciaTexto").innerHTML =
+        "📍 Distancia: " + distanciaCliente.toFixed(1) + " km";
 
-   div.onclick = ()=>{
+      document.getElementById("deliveryTexto2").innerHTML =
+        "🚗 Delivery estimado: Gs. " + costoDelivery.toLocaleString();
 
-    productoSeleccionado = prod;
+      actualizarTotalFinal();
+    },
 
-    document.getElementById("popup-nombre")
-    .innerText = prod.nombre;
-
-    document.getElementById("cantidad")
-    .value = 1;
-
-    popup.style.display = "flex";
-
-    if(categoriaActual !== "pizza"){
-
-     document.getElementById("btn-media")
-     .style.display = "none";
-
-     document.getElementById("btn-entera")
-     .innerText = "AGREGAR";
-
-    }else{
-
-     document.getElementById("btn-media")
-     .style.display = "block";
-
-     document.getElementById("btn-entera")
-     .innerText = "🍕 ENTERA";
+    () => {
+      alert("No pudimos obtener tu ubicación");
     }
 
-   };
-
-   menuDiv.appendChild(div);
-
-  });
-
- });
-
+  );
 }
 
-cargarProductos();
+// ===============================
+// TOTAL FINAL
+// ===============================
 
-document.getElementById("btnPizza")
-.onclick = ()=>{
+function actualizarTotalFinal(){
 
- categoriaActual = "pizza";
- cargarProductos();
-};
+  const total = carritoTotal + costoDelivery;
 
-document.getElementById("btnHamburguesa")
-.onclick = ()=>{
+  document.getElementById("deliveryTexto").innerHTML =
+    "Delivery: Gs. " + costoDelivery.toLocaleString();
 
- categoriaActual = "hamburguesa";
- cargarProductos();
-};
+  document.getElementById("totalFinal").innerHTML =
+    "TOTAL: Gs. " + total.toLocaleString();
+}
 
-document.getElementById("btnLomito")
-.onclick = ()=>{
-
- categoriaActual = "lomitos";
- cargarProductos();
-};
-
-document.getElementById("btnBebida")
-.onclick = ()=>{
-
- categoriaActual = "bebidas";
- cargarProductos();
-};
-
-document
-.getElementById("usar-ubicacion")
-.onclick = ()=>{
-
- navigator.geolocation
- .getCurrentPosition(pos=>{
-
-  const lat =
-  pos.coords.latitude;
-
-  const lng =
-  pos.coords.longitude;
-
-  mapsLink =
-  `https://maps.google.com/?q=${lat},${lng}`;
-
-  alert(
-   "Ubicación compartida ✔"
-  );
-
- },()=>{
-
-  alert(
-   "No se pudo obtener ubicación"
-  );
-
- });
-
-};
-
-window.cerrarPopup = ()=>{
-
- popup.style.display = "none";
-};
-
-document.getElementById("btn-entera")
-.onclick = ()=>{
-
- const cantidad =
- parseInt(
-  document.getElementById("cantidad").value
- ) || 1;
-
- push(pedidoRef,{
-
-  nombre:
-  productoSeleccionado.nombre,
-
-  precio:
-  Number(productoSeleccionado.precio),
-
-  cantidad,
-
-  categoria:
-  productoSeleccionado.categoria,
-
-  tipo:
-  categoriaActual === "pizza"
-  ? "Pizza Entera"
-  : "Normal"
-
- });
-
- popup.style.display = "none";
-};
-
-document.getElementById("btn-media")
-.onclick = ()=>{
-
- const cantidad =
- parseInt(
-  document.getElementById("cantidad").value
- ) || 1;
-
- if(!mediaPizza){
-
-  mediaPizza = {
-
-   nombre:
-   productoSeleccionado.nombre,
-
-   precio:
-   Number(productoSeleccionado.precio),
-
-   cantidad
-
-  };
-
-  popup.style.display = "none";
-
-  alert(
-   "Ahora selecciona la otra mitad 🍕"
-  );
-
- }else{
-
-  const nombreFinal =
-  mediaPizza.nombre +
-  " / " +
-  productoSeleccionado.nombre;
-
-  const precioFinal =
-  Math.max(
-   mediaPizza.precio,
-   Number(productoSeleccionado.precio)
-  );
-
-  push(pedidoRef,{
-
-   nombre:nombreFinal,
-
-   precio:precioFinal,
-
-   cantidad:mediaPizza.cantidad,
-
-   categoria:"pizza",
-
-   tipo:"Media y Media"
-
-  });
-
-  mediaPizza = null;
-
-  popup.style.display = "none";
- }
-
-};
-
-onValue(pedidoRef,(snap)=>{
-
- const data = snap.val();
-
- listaDiv.innerHTML = "";
-
- let total = 0;
-
- if(data){
-
-  Object.entries(data)
-  .forEach(([id,p])=>{
-
-   total +=
-   p.precio * p.cantidad;
-
-   const div =
-   document.createElement("div");
-
-   div.className = "item";
-
-   div.innerHTML = `
-
-    <div>
-
-     <p>
-      ${p.cantidad}x ${p.nombre}
-     </p>
-
-     <p style="
-      color:#facc15;
-      font-size:13px;
-      margin-top:4px;
-     ">
-      ${p.tipo || ""}
-     </p>
-
-     <p style="
-      color:#22c55e;
-      font-weight:bold;
-      margin-top:4px;
-     ">
-      Gs. ${(p.precio * p.cantidad)
-      .toLocaleString()}
-     </p>
-
-    </div>
-
-    <button
-     class="btn-eliminar">
-     🗑
-    </button>
-
-   `;
-
-   div.querySelector("button")
-   .onclick = ()=>{
-
-    remove(
-     ref(
-      db,
-      "pedidos/" + clienteId + "/" + id
-     )
-    );
-
-   };
-
-   listaDiv.appendChild(div);
-
-  });
-
- }
-
- totalDiv.innerText =
- "Gs. " + total.toLocaleString();
-
-});
+// ===============================
+// ENVIAR PEDIDO
+// ===============================
 
 function enviarPedido(){
 
- const nombre =
- document.getElementById("nombre")
- .value.trim();
-
- const telefono =
- document.getElementById("telefono")
- .value.trim();
-
- const observacion =
- document.getElementById("observacion")
- .value.trim();
-
- if(
-  !nombre ||
-  !telefono
- ){
-
-  alert(
-   "Completa nombre y teléfono"
-  );
-
-  return;
- }
-
- onValue(pedidoRef,(snap)=>{
-
-  const data = snap.val();
-
-  if(!data){
-
-   alert("No hay productos");
-
-   return;
+  if(carrito.length === 0){
+    alert("Agrega productos");
+    return;
   }
 
-  let total = 0;
+  const pedido = {
 
-  Object.values(data).forEach(p=>{
+    productos: carrito,
 
-   total +=
-   p.precio * p.cantidad;
-  });
+    subtotal: carritoTotal,
 
-  push(
-   ref(db,"pedidos_cocina"),
-   {
+    costoDelivery: costoDelivery,
 
-    tipoPedido:
-    "delivery",
+    distanciaKm: distanciaCliente.toFixed(1),
 
-    mesa:
-    "DELIVERY",
+    totalFinal: carritoTotal + costoDelivery,
 
-    nombre,
+    ubicacion: ubicacionCliente,
 
-    telefono,
+    fecha: Date.now(),
 
-    observacion,
+    tipo: "delivery"
+  };
 
-    maps:
-    mapsLink || "",
-
-    estado:
-    "pendiente",
-
-    timestamp:
-    Date.now(),
-
-    total,
-
-    items:data
-   }
-  );
-
-  remove(pedidoRef);
+  console.log(pedido);
 
   alert(
-   "Pedido enviado correctamente ✔"
+    "Pedido enviado\n\n" +
+    "Total: Gs. " +
+    pedido.totalFinal.toLocaleString()
   );
 
-  listaDiv.innerHTML = "";
-
-  totalDiv.innerText = "Gs. 0";
-
-  document.getElementById("pedido-flotante")
-  .style.display = "none";
-
- },{onlyOnce:true});
-
+  // AQUI VA FIREBASE
 }
+
+// ===============================
+// AL CARGAR
+// ===============================
+
+window.onload = () => {
+  obtenerUbicacionCliente();
+};
 
 </script>
 
