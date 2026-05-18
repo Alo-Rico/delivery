@@ -113,7 +113,7 @@ textarea.input{
 
 .categorias{
  display:grid;
- grid-template-columns:repeat(4,1fr);
+ grid-template-columns:repeat(3,1fr);
  gap:12px;
  width:95%;
  max-width:900px;
@@ -128,10 +128,6 @@ textarea.input{
  font-weight:bold;
  cursor:pointer;
  font-size:14px;
-}
-
-#btnPizza{
- background:#ef4444;
 }
 
 #btnHamburguesa{
@@ -290,7 +286,7 @@ textarea.input{
 @media(max-width:700px){
 
  .categorias{
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:1fr;
  }
 
  .menu-container{
@@ -350,10 +346,6 @@ Delivery Online en Tiempo Real
 
 <div class="categorias">
 
-<button id="btnPizza" class="cat-btn">
-🍕 PIZZAS
-</button>
-
 <button id="btnHamburguesa" class="cat-btn">
 🍔 HAMBURGUESAS
 </button>
@@ -408,10 +400,17 @@ Producto
  min="1">
 
 <button
- id="agregar"
+ id="btn-entera"
  class="popup-btn"
  style="background:#16a34a;">
-AGREGAR
+🍕 ENTERA
+</button>
+
+<button
+ id="btn-media"
+ class="popup-btn"
+ style="background:#f59e0b;">
+🍕 MEDIA
 </button>
 
 <button
@@ -478,6 +477,8 @@ let categoriaActual = "pizza";
 
 let mapsLink = "";
 
+let mediaPizza = null;
+
 const popup =
 document.getElementById("popup");
 
@@ -540,31 +541,24 @@ function cargarProductos(){
 
 cargarProductos();
 
-document.getElementById("btnPizza")
-.onclick = ()=>{
-
- categoriaActual = "pizza";
- cargarProductos();
-};
-
 document.getElementById("btnHamburguesa")
 .onclick = ()=>{
 
- categoriaActual = "hamburguesa";
+ categoriaActual = "hamburguesas";
  cargarProductos();
 };
 
 document.getElementById("btnLomito")
 .onclick = ()=>{
 
- categoriaActual = "lomito";
+ categoriaActual = "lomitos";
  cargarProductos();
 };
 
 document.getElementById("btnBebida")
 .onclick = ()=>{
 
- categoriaActual = "bebida";
+ categoriaActual = "bebidas";
  cargarProductos();
 };
 
@@ -597,7 +591,7 @@ window.cerrarPopup = ()=>{
  popup.style.display = "none";
 };
 
-document.getElementById("agregar")
+document.getElementById("btn-entera")
 .onclick = ()=>{
 
  const cantidad =
@@ -616,11 +610,76 @@ document.getElementById("agregar")
   cantidad,
 
   categoria:
-  productoSeleccionado.categoria
+  productoSeleccionado.categoria,
+
+  tipo:
+  "Pizza Entera"
 
  });
 
  popup.style.display = "none";
+};
+
+document.getElementById("btn-media")
+.onclick = ()=>{
+
+ const cantidad =
+ parseInt(
+  document.getElementById("cantidad").value
+ ) || 1;
+
+ if(!mediaPizza){
+
+  mediaPizza = {
+
+   nombre:
+   productoSeleccionado.nombre,
+
+   precio:
+   Number(productoSeleccionado.precio),
+
+   cantidad
+
+  };
+
+  popup.style.display = "none";
+
+  alert(
+   "Ahora selecciona la otra mitad 🍕"
+  );
+
+ }else{
+
+  const nombreFinal =
+  mediaPizza.nombre +
+  " / " +
+  productoSeleccionado.nombre;
+
+  const precioFinal =
+  Math.max(
+   mediaPizza.precio,
+   Number(productoSeleccionado.precio)
+  );
+
+  push(pedidoRef,{
+
+   nombre:nombreFinal,
+
+   precio:precioFinal,
+
+   cantidad:mediaPizza.cantidad,
+
+   categoria:"pizza",
+
+   tipo:"Media y Media"
+
+  });
+
+  mediaPizza = null;
+
+  popup.style.display = "none";
+ }
+
 };
 
 onValue(pedidoRef,(snap)=>{
