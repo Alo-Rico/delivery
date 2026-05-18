@@ -1,3 +1,6 @@
+# HTML DELIVERY COMPLETO - ALO RICO
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -349,8 +352,47 @@ Delivery Online en Tiempo Real
  placeholder="Observaciones"></textarea>
 
 <button id="usar-ubicacion">
-📍 Usar mi ubicación actual
+📍 Compartir ubicación y calcular delivery
 </button>
+
+<div id="delivery-alert" style="
+margin-top:15px;
+padding:16px;
+border-radius:18px;
+background:rgba(234,179,8,.18);
+border:1px solid rgba(234,179,8,.35);
+color:#fde68a;
+font-weight:600;
+line-height:1.5;
+">
+
+🚚 Comparte tu ubicación para calcular automáticamente el costo del delivery.
+
+</div>
+
+<div id="delivery-info" style="
+display:none;
+margin-top:14px;
+padding:16px;
+border-radius:18px;
+background:rgba(34,197,94,.15);
+border:1px solid rgba(34,197,94,.35);
+">
+
+<p style="
+color:#86efac;
+font-weight:bold;
+font-size:18px;
+">
+
+Costo Delivery:
+<span id="delivery-precio">
+Gs. 0
+</span>
+
+</p>
+
+</div>
 
 </div>
 
@@ -491,12 +533,37 @@ let categoriaActual = "pizza";
 
 let mapsLink = "";
 
+let deliveryCosto = 0;
+
+const ALO_RICO_LAT = -25.385353;
+const ALO_RICO_LNG = -57.353822;
+
 let mediaPizza = null;
 
 const popup =
 document.getElementById("popup");
 
 let timeoutPedido = null;
+
+function actualizarTotal(){
+
+ let total = 0;
+
+ document
+ .querySelectorAll(".precio-item")
+ .forEach(el=>{
+
+  total += Number(
+   el.dataset.valor
+  );
+
+ });
+
+ total += deliveryCosto;
+
+ totalDiv.innerText =
+ "Gs. " + total.toLocaleString();
+}
 
 document
 .getElementById("abrir-pedido")
@@ -629,6 +696,53 @@ document.getElementById("btnBebida")
  cargarProductos();
 };
 
+function calcularDistanciaKm(
+ lat1,
+ lon1,
+ lat2,
+ lon2
+){
+
+ const R = 6371;
+
+ const dLat =
+ (lat2-lat1) * Math.PI/180;
+
+ const dLon =
+ (lon2-lon1) * Math.PI/180;
+
+ const a =
+
+ Math.sin(dLat/2) *
+ Math.sin(dLat/2)
+
+ +
+
+ Math.cos(lat1*Math.PI/180) *
+ Math.cos(lat2*Math.PI/180)
+
+ *
+
+ Math.sin(dLon/2) *
+ Math.sin(dLon/2);
+
+ const c =
+ 2 * Math.atan2(
+  Math.sqrt(a),
+  Math.sqrt(1-a)
+ );
+
+ return R * c;
+}
+
+function redondearDelivery(valor){
+
+ if(valor <= 5000)
+  return 5000;
+
+ return Math.ceil(valor / 5000) * 5000;
+}
+
 document
 .getElementById("usar-ubicacion")
 .onclick = ()=>{
@@ -645,8 +759,44 @@ document
   mapsLink =
   `https://maps.google.com/?q=${lat},${lng}`;
 
+  const distancia =
+  calcularDistanciaKm(
+   ALO_RICO_LAT,
+   ALO_RICO_LNG,
+   lat,
+   lng
+  );
+
+  let costoBase =
+  distancia * 2000;
+
+  deliveryCosto =
+  redondearDelivery(costoBase);
+
+  document
+  .getElementById("delivery-alert")
+  .style.display = "none";
+
+  document
+  .getElementById("delivery-info")
+  .style.display = "block";
+
+  document
+  .getElementById("delivery-precio")
+  .innerText =
+  "Gs. " +
+  deliveryCosto.toLocaleString();
+
+  actualizarTotal();
+
   alert(
    "Ubicación cargada ✔"
+  );
+
+ },()=>{
+
+  alert(
+   "No se pudo obtener ubicación"
   );
 
  });
@@ -788,7 +938,10 @@ onValue(pedidoRef,(snap)=>{
       ${p.tipo || ""}
      </p>
 
-     <p style="
+     <p
+      class="precio-item"
+      data-valor="${p.precio * p.cantidad}"
+      style="
       color:#22c55e;
       font-weight:bold;
       margin-top:4px;
@@ -824,6 +977,8 @@ onValue(pedidoRef,(snap)=>{
 
  }
 
+ total += deliveryCosto;
+
  totalDiv.innerText =
  "Gs. " + total.toLocaleString();
 
@@ -850,15 +1005,6 @@ function enviarPedido(){
 
   alert(
    "Completa nombre y teléfono"
-  );
-
-  return;
- }
-
- if(!mapsLink){
-
-  alert(
-   "Debes cargar tu ubicación"
   );
 
   return;
@@ -908,7 +1054,9 @@ function enviarPedido(){
     timestamp:
     Date.now(),
 
-    total,
+    deliveryCosto,
+
+    total: total + deliveryCosto,
 
     items:data
    }
@@ -935,3 +1083,4 @@ function enviarPedido(){
 
 </body>
 </html>
+```
