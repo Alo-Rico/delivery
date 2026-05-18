@@ -5,16 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Alo Rico - Panel Operador</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Alo Rico Delivery</title>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 *{
  margin:0;
@@ -24,8 +19,9 @@
 
 body{
  font-family:'Poppins',sans-serif;
- background:#0f172a;
+ background:#111827;
  color:white;
+ min-height:100vh;
  overflow-x:hidden;
 }
 
@@ -33,14 +29,11 @@ body::before{
  content:"";
  position:fixed;
  inset:0;
-
  background:
- linear-gradient(rgba(0,0,0,.82),rgba(0,0,0,.90)),
- url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1600&auto=format&fit=crop');
-
+ linear-gradient(rgba(0,0,0,.84),rgba(0,0,0,.92)),
+ url('https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1600&auto=format&fit=crop');
  background-size:cover;
  background-position:center;
-
  z-index:-2;
 }
 
@@ -48,102 +41,276 @@ body::after{
  content:"";
  position:fixed;
  inset:0;
- backdrop-filter:blur(8px);
+ backdrop-filter:blur(6px);
  z-index:-1;
 }
 
-.card{
+header{
+ text-align:center;
+ padding:30px 20px 15px;
+}
+
+.logo{
+ width:120px;
+ border-radius:50%;
+ border:4px solid #facc15;
+ background:white;
+ box-shadow:0 0 35px rgba(250,204,21,.35);
+}
+
+h1{
+ margin-top:20px;
+ font-size:40px;
+ color:#facc15;
+}
+
+.sub{
+ color:#d1d5db;
+ margin-top:10px;
+}
+
+.formulario{
+ width:95%;
+ max-width:700px;
+ margin:25px auto;
  background:rgba(255,255,255,.06);
  border:1px solid rgba(255,255,255,.08);
- backdrop-filter:blur(12px);
  border-radius:28px;
- box-shadow:0 10px 35px rgba(0,0,0,.35);
+ padding:25px;
+ backdrop-filter:blur(10px);
 }
 
-.pedido-card{
- background:#1e293b;
- border-radius:24px;
- padding:22px;
- border:1px solid rgba(255,255,255,.08);
- box-shadow:0 10px 30px rgba(0,0,0,.35);
- transition:.25s;
- animation:fadeIn .3s ease;
+.input{
+ width:100%;
+ padding:16px;
+ border:none;
+ border-radius:16px;
+ background:#1f2937;
+ color:white;
+ margin-top:14px;
+ font-size:15px;
 }
 
-.pedido-card:hover{
- transform:translateY(-4px);
+textarea.input{
+ resize:none;
+ height:100px;
 }
 
-@keyframes fadeIn{
-
- from{
-  opacity:0;
-  transform:translateY(20px);
- }
-
- to{
-  opacity:1;
-  transform:translateY(0);
- }
-
+#usar-ubicacion{
+ width:100%;
+ margin-top:14px;
+ padding:16px;
+ border:none;
+ border-radius:16px;
+ background:#3b82f6;
+ color:white;
+ font-weight:bold;
+ cursor:pointer;
 }
 
-.btn{
+.categorias{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:12px;
+ width:95%;
+ max-width:900px;
+ margin:0 auto 20px;
+}
+
+.cat-btn{
+ padding:16px;
  border:none;
  border-radius:18px;
- padding:14px;
- font-weight:700;
- cursor:pointer;
- transition:.25s;
  color:white;
+ font-weight:bold;
+ cursor:pointer;
+ font-size:14px;
 }
 
-.btn:hover{
- transform:scale(1.03);
-}
-
-.scroll-area{
- max-height:78vh;
- overflow:auto;
- padding-right:4px;
-}
-
-.scroll-area::-webkit-scrollbar{
- width:6px;
-}
-
-.scroll-area::-webkit-scrollbar-thumb{
- background:#475569;
- border-radius:20px;
-}
-
-.estado-pendiente{
- background:#eab308;
- color:black;
-}
-
-.estado-preparando{
- background:#3b82f6;
-}
-
-.estado-listo{
- background:#22c55e;
-}
-
-.estado-entregado{
- background:#64748b;
-}
-
-.estado-cancelado{
+#btnPizza{
  background:#ef4444;
 }
 
-@media(max-width:900px){
+#btnHamburguesa{
+ background:#22c55e;
+}
 
- .scroll-area{
-  max-height:none;
+#btnLomito{
+ background:#f59e0b;
+ color:black;
+}
+
+#btnBebida{
+ background:#3b82f6;
+}
+
+.menu-container{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:22px;
+ padding:25px;
+ padding-bottom:160px;
+ max-width:1400px;
+ margin:auto;
+}
+
+.product{
+ background:rgba(255,255,255,.08);
+ border:1px solid rgba(255,255,255,.08);
+ border-radius:28px;
+ overflow:hidden;
+ cursor:pointer;
+ transition:.25s;
+ backdrop-filter:blur(10px);
+ box-shadow:0 10px 30px rgba(0,0,0,.30);
+}
+
+.product:hover{
+ transform:translateY(-6px);
+}
+
+.product img{
+ width:100%;
+ height:190px;
+ object-fit:cover;
+}
+
+.product h3{
+ font-size:20px;
+ margin-top:16px;
+ padding:0 12px;
+ text-align:center;
+}
+
+.product p{
+ margin:14px 0 24px;
+ text-align:center;
+ font-size:22px;
+ font-weight:700;
+ color:#22c55e;
+}
+
+#pedido-flotante{
+ display:none;
+ position:fixed;
+ bottom:90px;
+ left:50%;
+ transform:translateX(-50%);
+ width:95%;
+ max-width:500px;
+ background:#111827;
+ border-radius:28px;
+ padding:24px;
+ border:1px solid rgba(255,255,255,.08);
+ box-shadow:0 10px 40px rgba(0,0,0,.45);
+ z-index:9999;
+}
+
+.item{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ background:rgba(255,255,255,.05);
+ padding:12px;
+ border-radius:14px;
+ margin-top:10px;
+}
+
+.btn-eliminar{
+ width:30px;
+ height:30px;
+ border:none;
+ border-radius:50%;
+ background:#ef4444;
+ color:white;
+ cursor:pointer;
+}
+
+#total{
+ margin-top:18px;
+ font-size:28px;
+ color:#22c55e;
+ font-weight:bold;
+ text-align:center;
+}
+
+#abrir-pedido{
+ position:fixed;
+ bottom:20px;
+ right:20px;
+ background:#16a34a;
+ color:white;
+ border:none;
+ padding:18px 24px;
+ border-radius:20px;
+ font-weight:bold;
+ font-size:16px;
+ z-index:99999;
+ cursor:pointer;
+ box-shadow:0 10px 25px rgba(0,0,0,.35);
+}
+
+#popup{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.75);
+ justify-content:center;
+ align-items:center;
+ z-index:99999;
+}
+
+.popup-content{
+ background:#111827;
+ padding:28px;
+ border-radius:24px;
+ width:320px;
+}
+
+.popup-content input{
+ width:100%;
+ padding:14px;
+ border:none;
+ border-radius:14px;
+ background:#1f2937;
+ color:white;
+ margin-top:15px;
+}
+
+.popup-btn{
+ margin-top:15px;
+ width:100%;
+ padding:14px;
+ border:none;
+ border-radius:14px;
+ font-weight:bold;
+ cursor:pointer;
+ color:white;
+}
+
+@media(max-width:700px){
+
+ .categorias{
+  grid-template-columns:repeat(2,1fr);
  }
 
+ .menu-container{
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+ }
+
+ .product img{
+  height:150px;
+ }
+
+ h1{
+  font-size:30px;
+ }
+
+ #abrir-pedido{
+  width:90%;
+  right:5%;
+ }
 }
 
 </style>
@@ -152,144 +319,124 @@ body::after{
 
 <body>
 
-<div class="p-6">
+<header>
 
-<div class="flex flex-col xl:flex-row justify-between gap-5 mb-8">
+<img src="logo.png" class="logo">
 
- <div>
+<h1>ALO RICO DELIVERY</h1>
 
-  <h1 class="text-5xl font-bold text-yellow-400">
-   Alo Rico Panel
-  </h1>
+<p class="sub">
+Delivery Online en Tiempo Real
+</p>
 
-  <p class="text-gray-300 mt-2 text-lg">
-   Operador • Cocina • Delivery
-  </p>
+</header>
 
- </div>
+<div class="formulario">
 
- <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<input
+ id="nombre"
+ class="input"
+ placeholder="Nombre y Apellido">
 
-  <div class="card p-5 min-w-[170px]">
+<input
+ id="telefono"
+ class="input"
+ placeholder="Teléfono">
 
-   <p class="text-gray-400 text-sm">
-    Ventas Hoy
-   </p>
+<textarea
+ id="observacion"
+ class="input"
+ placeholder="Observaciones"></textarea>
 
-   <h2
-    id="ventas-hoy"
-    class="text-2xl font-bold text-green-400 mt-2">
-    Gs. 0
-   </h2>
-
-  </div>
-
-  <div class="card p-5 min-w-[170px]">
-
-   <p class="text-gray-400 text-sm">
-    Pedidos Activos
-   </p>
-
-   <h2
-    id="cantidad-pedidos"
-    class="text-2xl font-bold text-blue-400 mt-2">
-    0
-   </h2>
-
-  </div>
-
-  <div class="card p-5 min-w-[170px]">
-
-   <p class="text-gray-400 text-sm">
-    Deliverys
-   </p>
-
-   <h2
-    id="cantidad-delivery"
-    class="text-2xl font-bold text-orange-400 mt-2">
-    0
-   </h2>
-
-  </div>
-
-  <div class="card p-5 min-w-[170px]">
-
-   <p class="text-gray-400 text-sm">
-    Estado
-   </p>
-
-   <h2 class="text-xl font-bold text-pink-400 mt-2">
-    Tiempo Real
-   </h2>
-
-  </div>
-
- </div>
+<button id="usar-ubicacion">
+📍 Usar mi ubicación actual
+</button>
 
 </div>
 
-<div class="grid grid-cols-1 xl:grid-cols-4 gap-6">
+<div class="categorias">
 
- <div class="card p-5">
+<button id="btnPizza" class="cat-btn">
+🍕 PIZZAS
+</button>
 
-  <h2 class="text-3xl font-bold text-yellow-400 mb-5">
-   Pendientes
-  </h2>
+<button id="btnHamburguesa" class="cat-btn">
+🍔 HAMBURGUESAS
+</button>
 
-  <div
-   id="contenedor-pendientes"
-   class="scroll-area space-y-5">
-  </div>
+<button id="btnLomito" class="cat-btn">
+🥪 LOMITOS
+</button>
 
- </div>
+<button id="btnBebida" class="cat-btn">
+🥤 BEBIDAS
+</button>
 
- <div class="card p-5">
+</div>
 
-  <h2 class="text-3xl font-bold text-blue-400 mb-5">
-   En Preparación
-  </h2>
+<div id="menu" class="menu-container"></div>
 
-  <div
-   id="contenedor-cocina"
-   class="scroll-area space-y-5">
-  </div>
+<button id="abrir-pedido">
+🛒 ENVIAR PEDIDO
+</button>
 
- </div>
+<div id="pedido-flotante">
 
- <div class="card p-5">
+<h2 style="
+text-align:center;
+font-size:28px;
+margin-bottom:15px;
+color:#facc15;
+">
+Mi Pedido
+</h2>
 
-  <h2 class="text-3xl font-bold text-green-400 mb-5">
-   Listos
-  </h2>
+<div id="lista"></div>
 
-  <div
-   id="contenedor-listos"
-   class="scroll-area space-y-5">
-  </div>
-
- </div>
-
- <div class="card p-5">
-
-  <h2 class="text-3xl font-bold text-gray-300 mb-5">
-   Historial
-  </h2>
-
-  <div
-   id="contenedor-historial"
-   class="scroll-area space-y-5">
-  </div>
-
- </div>
-
+<div id="total">
+Gs. 0
 </div>
 
 </div>
 
-<audio
- id="nuevo-pedido"
- src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3">
-</audio>
+<div id="popup">
+
+<div class="popup-content">
+
+<h2 id="popup-nombre">
+Producto
+</h2>
+
+<input
+ id="cantidad"
+ type="number"
+ value="1"
+ min="1">
+
+<button
+ id="btn-entera"
+ class="popup-btn"
+ style="background:#16a34a;">
+AGREGAR
+</button>
+
+<button
+ id="btn-media"
+ class="popup-btn"
+ style="background:#f59e0b;">
+🍕 MEDIA
+</button>
+
+<button
+ onclick="cerrarPopup()"
+ class="popup-btn"
+ style="background:#ef4444;">
+CANCELAR
+</button>
+
+</div>
+
+</div>
 
 <script type="module">
 
@@ -299,8 +446,9 @@ from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 import {
  getDatabase,
  ref,
+ push,
  onValue,
- update
+ remove
 }
 from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
 
@@ -313,15 +461,7 @@ const firebaseConfig = {
  databaseURL:
  "https://alorico-59754-default-rtdb.firebaseio.com",
 
- projectId: "alorico-59754",
-
- storageBucket:
- "alorico-59754.firebasestorage.app",
-
- messagingSenderId: "120993494626",
-
- appId:
- "1:120993494626:web:9f9cb0ad6fbfbd1abd033b"
+ projectId: "alorico-59754"
 };
 
 const app =
@@ -330,462 +470,466 @@ initializeApp(firebaseConfig);
 const db =
 getDatabase(app);
 
-const pendientesDiv =
-document.getElementById("contenedor-pendientes");
+const clienteId =
+"delivery_" + Date.now();
 
-const cocinaDiv =
-document.getElementById("contenedor-cocina");
+const pedidoRef =
+ref(db,"pedidos/" + clienteId);
 
-const listosDiv =
-document.getElementById("contenedor-listos");
+const menuDiv =
+document.getElementById("menu");
 
-const historialDiv =
-document.getElementById("contenedor-historial");
+const listaDiv =
+document.getElementById("lista");
 
-const ventasHoy =
-document.getElementById("ventas-hoy");
+const totalDiv =
+document.getElementById("total");
 
-const cantidadPedidos =
-document.getElementById("cantidad-pedidos");
+let productoSeleccionado = null;
 
-const cantidadDelivery =
-document.getElementById("cantidad-delivery");
+let categoriaActual = "pizza";
 
-const audio =
-document.getElementById("nuevo-pedido");
+let mapsLink = "";
 
-let pedidosDetectados = {};
+let mediaPizza = null;
 
-function obtenerFechaOperativa(ts){
+const popup =
+document.getElementById("popup");
 
- const fecha =
- new Date(ts);
+let timeoutPedido = null;
 
- if(fecha.getHours() < 4){
+document
+.getElementById("abrir-pedido")
+.onclick = ()=>{
 
-  fecha.setDate(
-   fecha.getDate() - 1
-  );
+ const panel =
+ document.getElementById("pedido-flotante");
 
- }
+ if(panel.style.display === "block"){
 
- return fecha.toDateString();
-}
-
-window.abrirMaps = (url)=>{
-
- window.open(
-  url,
-  "_blank"
- );
-
-};
-
-onValue(ref(db,"pedidos_cocina"),(snap)=>{
-
- const data = snap.val();
-
- pendientesDiv.innerHTML = "";
- cocinaDiv.innerHTML = "";
- listosDiv.innerHTML = "";
- historialDiv.innerHTML = "";
-
- let totalGeneral = 0;
- let totalPedidos = 0;
- let totalDeliverys = 0;
-
- const hoyOperativo =
- obtenerFechaOperativa(
-  Date.now()
- );
-
- if(!data){
-
-  ventasHoy.innerText = "Gs. 0";
-  cantidadPedidos.innerText = "0";
-  cantidadDelivery.innerText = "0";
+  enviarPedido();
 
   return;
  }
 
- const pedidos =
- Object.entries(data);
+ panel.style.display = "block";
 
- pedidos.forEach(([pedidoId,pedido])=>{
+ clearTimeout(timeoutPedido);
 
-  if(!pedidosDetectados[pedidoId]){
+ timeoutPedido = setTimeout(()=>{
 
-   pedidosDetectados[pedidoId] = true;
+  panel.style.display = "none";
 
-   try{
+ },7000);
 
-    audio.currentTime = 0;
+};
 
-    audio.play();
+function cargarProductos(){
 
-   }catch(e){}
+ const productosRef =
+ ref(db,"productos");
 
-  }
+ onValue(productosRef,(snap)=>{
 
- });
+  const data = snap.val();
 
- pedidos.forEach(([pedidoId,pedido])=>{
+  menuDiv.innerHTML = "";
 
-  let estado =
-  pedido.estado || "pendiente";
+  if(!data) return;
 
-  let itemsHTML = "";
+  Object.values(data).forEach(prod=>{
 
-  let total = 0;
+   if(prod.categoria !== categoriaActual)
+    return;
 
-  Object.entries(pedido.items || {})
-  .forEach(([k,p])=>{
+   const div =
+   document.createElement("div");
 
-   if(
-    typeof p === "object" &&
-    p !== null &&
-    p.nombre
-   ){
+   div.className =
+   "product";
 
-    total +=
-    Number(p.precio) *
-    Number(p.cantidad);
+   div.innerHTML = `
 
-    itemsHTML += `
-     <p>
-      ${p.cantidad}x ${p.nombre}
-     </p>
-    `;
-   }
+   <img src="${prod.imagen}">
+
+   <h3>${prod.nombre}</h3>
+
+   <p>
+    Gs. ${Number(prod.precio).toLocaleString()}
+   </p>
+
+   `;
+
+   div.onclick = ()=>{
+
+    productoSeleccionado = prod;
+
+    document.getElementById("popup-nombre")
+    .innerText = prod.nombre;
+
+    document.getElementById("cantidad")
+    .value = 1;
+
+    popup.style.display = "flex";
+
+    if(categoriaActual !== "pizza"){
+
+     document.getElementById("btn-media")
+     .style.display = "none";
+
+     document.getElementById("btn-entera")
+     .innerText = "AGREGAR";
+
+    }else{
+
+     document.getElementById("btn-media")
+     .style.display = "block";
+
+     document.getElementById("btn-entera")
+     .innerText = "🍕 ENTERA";
+    }
+
+   };
+
+   menuDiv.appendChild(div);
 
   });
 
-  if(itemsHTML.trim() === "")
-   return;
+ });
 
-  const fechaPedido =
-  obtenerFechaOperativa(
-   pedido.timestamp || Date.now()
+}
+
+cargarProductos();
+
+document.getElementById("btnPizza")
+.onclick = ()=>{
+
+ categoriaActual = "pizza";
+ cargarProductos();
+};
+
+document.getElementById("btnHamburguesa")
+.onclick = ()=>{
+
+ categoriaActual = "hamburguesa";
+ cargarProductos();
+};
+
+document.getElementById("btnLomito")
+.onclick = ()=>{
+
+ categoriaActual = "lomitos";
+ cargarProductos();
+};
+
+document.getElementById("btnBebida")
+.onclick = ()=>{
+
+ categoriaActual = "bebidas";
+ cargarProductos();
+};
+
+document
+.getElementById("usar-ubicacion")
+.onclick = ()=>{
+
+ navigator.geolocation
+ .getCurrentPosition(pos=>{
+
+  const lat =
+  pos.coords.latitude;
+
+  const lng =
+  pos.coords.longitude;
+
+  mapsLink =
+  `https://maps.google.com/?q=${lat},${lng}`;
+
+  alert(
+   "Ubicación cargada ✔"
   );
-
-  if(fechaPedido === hoyOperativo){
-
-   totalGeneral += total;
-
-   if(
-    estado !== "entregado" &&
-    estado !== "cancelado"
-   ){
-
-    totalPedidos++;
-   }
-
-   if(
-    pedido.tipoPedido === "delivery"
-   ){
-
-    totalDeliverys++;
-   }
-
-  }
-
-  let estadoClass =
-  "estado-pendiente";
-
-  if(estado === "preparando"){
-
-   estadoClass =
-   "estado-preparando";
-  }
-
-  if(estado === "listo"){
-
-   estadoClass =
-   "estado-listo";
-  }
-
-  if(estado === "entregado"){
-
-   estadoClass =
-   "estado-entregado";
-  }
-
-  if(estado === "cancelado"){
-
-   estadoClass =
-   "estado-cancelado";
-  }
-
-  const card =
-  document.createElement("div");
-
-  card.className =
-  "pedido-card";
-
-  card.innerHTML = `
-
-   <div class="
-    flex justify-between items-center mb-4
-   ">
-
-    <h3 class="
-     text-2xl font-bold
-    ">
-     ${
-      pedido.tipoPedido === "delivery"
-      ? "DELIVERY"
-      : "Mesa " + pedido.mesa
-     }
-    </h3>
-
-    <span class="
-     ${estadoClass}
-     px-4 py-1
-     rounded-full
-     font-bold
-     text-sm
-    ">
-     ${estado.toUpperCase()}
-    </span>
-
-   </div>
-
-   ${
-    pedido.nombre
-    ? `
-    <p class="mb-2 text-cyan-300">
-     👤 ${pedido.nombre}
-    </p>
-    `
-    : ""
-   }
-
-   ${
-    pedido.telefono
-    ? `
-    <p class="mb-4 text-green-300">
-     📞 ${pedido.telefono}
-    </p>
-    `
-    : ""
-   }
-
-   <div class="
-    space-y-2
-    text-lg
-    text-gray-200
-   ">
-    ${itemsHTML}
-   </div>
-
-   ${
-    pedido.observacion
-    ? `
-    <div class="
-     mt-4
-     bg-yellow-500/20
-     border border-yellow-500/30
-     rounded-2xl
-     p-4
-    ">
-
-     <p class="
-      text-yellow-300
-      font-bold
-      mb-2
-     ">
-      📝 Observaciones
-     </p>
-
-     <p class="text-white">
-      ${pedido.observacion}
-     </p>
-
-    </div>
-    `
-    : ""
-   }
-
-   ${
-    pedido.maps
-    ? `
-    <button
-     onclick="abrirMaps('${pedido.maps}')"
-     class="
-      w-full
-      mt-5
-      bg-cyan-500
-      py-3
-      rounded-2xl
-      font-bold
-     ">
-
-     📍 VER UBICACIÓN
-
-    </button>
-    `
-    : ""
-   }
-
-   <div class="
-    flex justify-between
-    items-center
-    mt-5 mb-5
-   ">
-
-    <span class="
-     text-green-400
-     font-bold
-     text-2xl
-    ">
-     Gs. ${total.toLocaleString()}
-    </span>
-
-   </div>
-
-   <div class="
-    grid grid-cols-2 gap-3
-   ">
-
-    <button
-     class="btn bg-blue-500"
-     id="cocina-${pedidoId}">
-     Enviar a Cocina
-    </button>
-
-    <button
-     class="btn bg-green-500"
-     id="listo-${pedidoId}">
-     Listo
-    </button>
-
-    <button
-     class="btn bg-gray-500"
-     id="entregado-${pedidoId}">
-     Entregado
-    </button>
-
-    <button
-     class="btn bg-red-500"
-     id="cancelar-${pedidoId}">
-     Cancelar
-    </button>
-
-   </div>
-
-  `;
-
-  if(estado === "pendiente"){
-
-   pendientesDiv.appendChild(card);
-  }
-
-  if(estado === "preparando"){
-
-   cocinaDiv.appendChild(card);
-  }
-
-  if(estado === "listo"){
-
-   listosDiv.appendChild(card);
-  }
-
-  if(
-   estado === "entregado" ||
-   estado === "cancelado"
-  ){
-
-   historialDiv.appendChild(card);
-  }
-
-  setTimeout(()=>{
-
-   const btnCocina =
-   document.getElementById(`cocina-${pedidoId}`);
-
-   if(btnCocina){
-
-    btnCocina.onclick = ()=>{
-
-     update(
-      ref(db,"pedidos_cocina/" + pedidoId),
-      {
-       estado:"preparando"
-      }
-     );
-
-    };
-
-   }
-
-   const btnListo =
-   document.getElementById(`listo-${pedidoId}`);
-
-   if(btnListo){
-
-    btnListo.onclick = ()=>{
-
-     update(
-      ref(db,"pedidos_cocina/" + pedidoId),
-      {
-       estado:"listo"
-      }
-     );
-
-    };
-
-   }
-
-   const btnEntregado =
-   document.getElementById(`entregado-${pedidoId}`);
-
-   if(btnEntregado){
-
-    btnEntregado.onclick = ()=>{
-
-     update(
-      ref(db,"pedidos_cocina/" + pedidoId),
-      {
-       estado:"entregado"
-      }
-     );
-
-    };
-
-   }
-
-   const btnCancelar =
-   document.getElementById(`cancelar-${pedidoId}`);
-
-   if(btnCancelar){
-
-    btnCancelar.onclick = ()=>{
-
-     update(
-      ref(db,"pedidos_cocina/" + pedidoId),
-      {
-       estado:"cancelado"
-      }
-     );
-
-    };
-
-   }
-
-  },100);
 
  });
 
- ventasHoy.innerText =
- "Gs. " + totalGeneral.toLocaleString();
+};
 
- cantidadPedidos.innerText =
- totalPedidos;
+window.cerrarPopup = ()=>{
 
- cantidadDelivery.innerText =
- totalDeliverys;
+ popup.style.display = "none";
+};
+
+document.getElementById("btn-entera")
+.onclick = ()=>{
+
+ const cantidad =
+ parseInt(
+  document.getElementById("cantidad").value
+ ) || 1;
+
+ push(pedidoRef,{
+
+  nombre:
+  productoSeleccionado.nombre,
+
+  precio:
+  Number(productoSeleccionado.precio),
+
+  cantidad,
+
+  categoria:
+  productoSeleccionado.categoria,
+
+  tipo:
+  categoriaActual === "pizza"
+  ? "Pizza Entera"
+  : "Normal"
+
+ });
+
+ popup.style.display = "none";
+};
+
+document.getElementById("btn-media")
+.onclick = ()=>{
+
+ const cantidad =
+ parseInt(
+  document.getElementById("cantidad").value
+ ) || 1;
+
+ if(!mediaPizza){
+
+  mediaPizza = {
+
+   nombre:
+   productoSeleccionado.nombre,
+
+   precio:
+   Number(productoSeleccionado.precio),
+
+   cantidad
+
+  };
+
+  popup.style.display = "none";
+
+  alert(
+   "Ahora selecciona la otra mitad 🍕"
+  );
+
+ }else{
+
+  const nombreFinal =
+  mediaPizza.nombre +
+  " / " +
+  productoSeleccionado.nombre;
+
+  const precioFinal =
+  Math.max(
+   mediaPizza.precio,
+   Number(productoSeleccionado.precio)
+  );
+
+  push(pedidoRef,{
+
+   nombre:nombreFinal,
+
+   precio:precioFinal,
+
+   cantidad:mediaPizza.cantidad,
+
+   categoria:"pizza",
+
+   tipo:"Media y Media"
+
+  });
+
+  mediaPizza = null;
+
+  popup.style.display = "none";
+ }
+
+};
+
+onValue(pedidoRef,(snap)=>{
+
+ const data = snap.val();
+
+ listaDiv.innerHTML = "";
+
+ let total = 0;
+
+ if(data){
+
+  Object.entries(data)
+  .forEach(([id,p])=>{
+
+   total +=
+   p.precio * p.cantidad;
+
+   const div =
+   document.createElement("div");
+
+   div.className = "item";
+
+   div.innerHTML = `
+
+    <div>
+
+     <p>
+      ${p.cantidad}x ${p.nombre}
+     </p>
+
+     <p style="
+      color:#facc15;
+      font-size:13px;
+      margin-top:4px;
+     ">
+      ${p.tipo || ""}
+     </p>
+
+     <p style="
+      color:#22c55e;
+      font-weight:bold;
+      margin-top:4px;
+     ">
+      Gs. ${(p.precio * p.cantidad)
+      .toLocaleString()}
+     </p>
+
+    </div>
+
+    <button
+     class="btn-eliminar">
+     🗑
+    </button>
+
+   `;
+
+   div.querySelector("button")
+   .onclick = ()=>{
+
+    remove(
+     ref(
+      db,
+      "pedidos/" + clienteId + "/" + id
+     )
+    );
+
+   };
+
+   listaDiv.appendChild(div);
+
+  });
+
+ }
+
+ totalDiv.innerText =
+ "Gs. " + total.toLocaleString();
 
 });
+
+function enviarPedido(){
+
+ const nombre =
+ document.getElementById("nombre")
+ .value.trim();
+
+ const telefono =
+ document.getElementById("telefono")
+ .value.trim();
+
+ const observacion =
+ document.getElementById("observacion")
+ .value.trim();
+
+ if(
+  !nombre ||
+  !telefono
+ ){
+
+  alert(
+   "Completa nombre y teléfono"
+  );
+
+  return;
+ }
+
+ if(!mapsLink){
+
+  alert(
+   "Debes cargar tu ubicación"
+  );
+
+  return;
+ }
+
+ onValue(pedidoRef,(snap)=>{
+
+  const data = snap.val();
+
+  if(!data){
+
+   alert("No hay productos");
+
+   return;
+  }
+
+  let total = 0;
+
+  Object.values(data).forEach(p=>{
+
+   total +=
+   p.precio * p.cantidad;
+  });
+
+  push(
+   ref(db,"pedidos_cocina"),
+   {
+
+    tipoPedido:
+    "delivery",
+
+    mesa:
+    "DELIVERY",
+
+    nombre,
+
+    telefono,
+
+    observacion,
+
+    maps:
+    mapsLink,
+
+    estado:
+    "pendiente",
+
+    timestamp:
+    Date.now(),
+
+    total,
+
+    items:data
+   }
+  );
+
+  remove(pedidoRef);
+
+  alert(
+   "Pedido enviado correctamente ✔"
+  );
+
+  listaDiv.innerHTML = "";
+
+  totalDiv.innerText = "Gs. 0";
+
+  document.getElementById("pedido-flotante")
+  .style.display = "none";
+
+ },{onlyOnce:true});
+
+}
 
 </script>
 
