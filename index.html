@@ -349,7 +349,7 @@ Delivery Online en Tiempo Real
  placeholder="Observaciones"></textarea>
 
 <button id="usar-ubicacion">
-📍 Usar mi ubicación actual
+📍 Compartir ubicación (opcional)
 </button>
 
 </div>
@@ -646,7 +646,13 @@ document
   `https://maps.google.com/?q=${lat},${lng}`;
 
   alert(
-   "Ubicación cargada ✔"
+   "Ubicación compartida ✔"
+  );
+
+ },()=>{
+
+  alert(
+   "No se pudo obtener ubicación"
   );
 
  });
@@ -855,15 +861,6 @@ function enviarPedido(){
   return;
  }
 
- if(!mapsLink){
-
-  alert(
-   "Debes cargar tu ubicación"
-  );
-
-  return;
- }
-
  onValue(pedidoRef,(snap)=>{
 
   const data = snap.val();
@@ -900,7 +897,7 @@ function enviarPedido(){
     observacion,
 
     maps:
-    mapsLink,
+    mapsLink || "",
 
     estado:
     "pendiente",
